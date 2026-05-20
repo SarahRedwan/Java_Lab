@@ -125,7 +125,6 @@ public class ChatClient extends Application {
                 byte[] bytes = java.nio.file.Files.readAllBytes(file.toPath());
                 String base64 = Base64.getEncoder().encodeToString(bytes);
 
-                // FIX: Do NOT display locally — server will send it back once
                 out.println("IMAGE:" + base64);
 
             } catch (Exception ex) {
