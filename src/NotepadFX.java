@@ -33,9 +33,6 @@ public class NotepadFX extends Application {
                         item("Save", e -> save(false)),
                         item("Save As", e -> save(true)),
                         new SeparatorMenuItem(),
-                        item("Close Tab", e -> closeTab()),
-                        item("Close Window", e -> stage.close()),
-                        new SeparatorMenuItem(),
                         item("Exit", e -> System.exit(0))
                 ),
                 new Menu("Edit",
@@ -81,7 +78,9 @@ public class NotepadFX extends Application {
         tabs.getSelectionModel().select(t);
     }
 
-    private TextArea area() { return (TextArea) tabs.getSelectionModel().getSelectedItem().getContent(); }
+    private TextArea area() {
+        return (TextArea) tabs.getSelectionModel().getSelectedItem().getContent();
+    }
 
     private void open() {
         File f = new FileChooser().showOpenDialog(stage);
@@ -96,11 +95,6 @@ public class NotepadFX extends Application {
         if (f != null) try (FileWriter w = new FileWriter(f)) {
             w.write(area().getText());
         } catch (Exception ignored) {}
-    }
-
-    private void closeTab() {
-        Tab t = tabs.getSelectionModel().getSelectedItem();
-        if (!t.getText().equals("+")) tabs.getTabs().remove(t);
     }
 
     private void insertTime() {
